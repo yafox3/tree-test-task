@@ -106,13 +106,14 @@ function createTree(data) {
 function toHTML(tree) {
 	let html = '<ul>'
 	for (const id in tree) {
-		const hasChildren = tree[id].children?.length > 0
+		const node = tree[id]
+		const hasChildren = node.children?.length > 0
 
 		if (hasChildren) {
-			html += `<li><span>${tree[id].name}</span>`
-			html += `${toHTML(tree[id].children)}`
+			html += `<li><span>${node.name}</span>`
+			html += toHTML(node.children)
 		} else {
-			html += `<li>${tree[id].name} (${tree[id].price})`
+			html += `<li>${node.name} (${node.price})`
 		}
 
 		html += '</li>'
@@ -127,10 +128,10 @@ const sortedData = apiResult.services.sort((a, b) => a.sorthead - b.sorthead)
 
 $tree.innerHTML = toHTML(createTree(sortedData))
 
-$tree.addEventListener('click', (e) => {
+$tree.addEventListener('click', e => {
 	if (e.target.tagName !== 'SPAN') {
 		return
 	}
-	
+
 	e.target.classList.toggle('show')
 })
