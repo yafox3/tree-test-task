@@ -1,0 +1,26 @@
+ul,
+ol,
+li {
+	list-style: none;
+}
+
+#tree span {
+	cursor: pointer;
+}
+
+#tree span.show::before {
+	content: "-";
+}
+
+#tree span::before {
+	content: "+";
+}
+
+#tree span ~ ul {
+	display: none;
+}
+
+#tree span.show ~ ul {
+	display: block;
+}
+
